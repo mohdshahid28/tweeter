@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}blog home{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-4" >welcome to blog</h1>
+
+<a class="btn btn-primary mb-4" href="{% url 'tweet_create' %}">create a tweet</a>
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+    <section class="card" style="max-width: 320px">
+  <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h4 class="card-title">{{tweet.user.username}}</h4>
+    <p class="card-text">{{tweet.text}}</p>
+    {% if tweet.user == user %}
+    <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">edit</a>
+    <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">delete</a>
+    {% endif %}
+  </div>
+</section>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
